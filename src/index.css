@@ -13,3 +13,7 @@ body{
 #tasklist::-webkit-scrollbar{
   display:none;
 }
+input[type="date"]::-webkit-calendar-picker-indicator {
+    filter: invert(1); /* Turns the black icon into white */
+    cursor: pointer;
+}
