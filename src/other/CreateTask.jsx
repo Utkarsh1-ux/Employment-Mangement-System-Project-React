@@ -3,59 +3,48 @@ import { AuthContext } from '../context/AuthProvider'
 
 const CreateTask = () => {
 
-const[userData,setUserData]=useContext(AuthContext)
+    const [userData, setUserData] = useContext(AuthContext)
 
-// const[title,setTitle]=useState("")
-// const[date,setDate]=useState("")
-// const[assignTo,setAssignTo]=useState("")
-// const[category,setCategory]=useState("")
-// const[description,setDescription]=useState("")
-
-  const [taskTitle, setTaskTitle] = useState('')
+    const [taskTitle, setTaskTitle] = useState('')
     const [taskDescription, setTaskDescription] = useState('')
     const [taskDate, setTaskDate] = useState('')
     const [asignTo, setAsignTo] = useState('')
     const [category, setCategory] = useState('')
 
-
-
-
-const [newTask,setNewTask]=useState({})
-
-    const submitHandler=(e)=>{
+    const submitHandler = (e) => {
         e.preventDefault()
 
-         setNewTask({ taskTitle, taskDescription, taskDate, category, active: false, newTask: true, failed: false, completed: false })
-
-         
-        const data=userData
        
+        const newTask = { 
+            taskTitle, 
+            taskDescription, 
+            taskDate, 
+            category, 
+            active: false, 
+            newTask: true, 
+            failed: false, 
+            completed: false 
+        }
 
-        data.forEach(function(elem){
-           if(asignTo ==elem.firstName){
-            elem.tasks.push(newTask)
-            elem.taskCounts.newTask+=1
-            
-           }
+        const data = userData // It's better to clone it: const data = [...userData]
+
+        data.forEach(function (elem) {
+            if (asignTo == elem.firstName) {
+               
+                elem.tasks.push(newTask)
+                elem.taskCounts.newTask += 1
+            }
         })
 
-       setUserData(data)
-       console.log(data)
+        setUserData(data)
+        console.log(data)
 
-        // setTitle("")
-        // setDate("")
-        // setAssignTo("")
-        // setCategory("")
-        // setDescription("")
-
-         setTaskTitle('')
+      
+        setTaskTitle('')
         setCategory('')
         setAsignTo('')
         setTaskDate('')
         setTaskDescription('')
-
-
-      
     }
     return (
         <div className='p-5 bg-[#1c1c1c] mt-5 rounded'>
